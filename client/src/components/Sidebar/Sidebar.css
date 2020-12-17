@@ -1,0 +1,11 @@
+
+.sidebar-row:hover{
+    background-color: #eff2f5;
+    border-radius: 10px;
+}
+
+.sidebar-row  h4{
+    font-weight: 600;
+    font-size: 18px;
+}
+

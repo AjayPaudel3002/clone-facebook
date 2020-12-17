@@ -1,0 +1,44 @@
+.header{
+    position:sticky;
+    background-color: white;
+    box-shadow: 0 8px 6px -6px #eff2f5;
+}
+.header-input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  padding: 10px;
+}
+.header-left {
+  background-color: #eff2f5;
+  border-radius: 999px;
+}
+
+.header-icons > .MuiSvgIcon-root {
+  color: grey;
+}
+
+.header-icons:hover > .MuiSvgIcon-root{
+    color: #2e81f4;
+} 
+
+.header-icons{
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+.MuiSvgIcon-root {
+  color: grey;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+}
+
+.account > h4 {
+   margin-bottom: 0;
+   
+}
+
