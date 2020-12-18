@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeIcon from "@material-ui/icons/Home";
 import FlagIcon from "@material-ui/icons/Flag";
@@ -32,11 +32,13 @@ const Header = ({ currentUser, logOut }) => {
           <div className="col-md-3">
             <div className="row pt-2">
               <div className="col-md-2 ">
+                <Link to="/">
                 <img
                   src="https://res.cloudinary.com/dueq2a3w1/image/upload/v1607583958/Facebook%20Clone/fb-logo_octlga.png"
                   alt=""
                   width="40px"
                 />
+                </Link>
               </div>
               <div className="col-md-10 ">
                 <form className="header-left" onSubmit={(e) => searchPeople(e)}>
@@ -83,24 +85,25 @@ const Header = ({ currentUser, logOut }) => {
           </div>
           <div className="col-md-3 offset-md-1 ">
             <div className="d-flex flex-row  justify-content-between ">
-              <div
-                className=" account "
-                onClick={() => history.push(`/user/profile`)}
-              >
-                {" "}
-                <img
-                  src={
-                    currentUser.profilePicture
-                      ? currentUser.profilePicture
-                      : "https://res.cloudinary.com/dueq2a3w1/image/upload/v1608046828/default-image1_w8javi.jpg"
-                  }
-                  alt=""
-                  width="40px"
-                  className="mr-2 rounded-circle"
-                />
-                <span>
-                  {currentUser.firstName + " " + currentUser.lastName}
-                </span>
+              <div className=" account ">
+                <Link
+                  to="/user/profile"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <img
+                    src={
+                      currentUser.profilePicture
+                        ? currentUser.profilePicture
+                        : "https://res.cloudinary.com/dueq2a3w1/image/upload/v1608046828/default-image1_w8javi.jpg"
+                    }
+                    alt=""
+                    width="40px"
+                    className="mr-2 rounded-circle"
+                  />
+                  <span>
+                    {currentUser.firstName + " " + currentUser.lastName}
+                  </span>
+                </Link>
               </div>
               <IconButton>
                 <ForumIcon />

@@ -7,7 +7,7 @@ exports.sendFriendRequest = async (req, res, next) => {
   const { toUser } = req.params;
   const newRequest = new FriendRequest({
     ...req.body,
-    createdAt: moment().format("MM/DD/YYYY HH:mm"),
+    createdAt: moment.utc().format(),
     status: "Pending",
     from: req.user._id,
     to: toUser,

@@ -103,7 +103,7 @@ exports.getUsersPost = async (req, res, next) => {
         populate: {
           path: "user",
           model: "User",
-          select: "firstName ,lastName profilePicture",
+          select: "firstName lastName profilePicture",
         },
       })
       .populate({
@@ -156,7 +156,7 @@ exports.addComment = async (req, res, next) => {
     ...req.body,
     content,
     user: req.user._id,
-    createdAt: moment().format("MM/DD/YYYY HH:mm"),
+    createdAt: moment.utc().format(),
     post: req.params.id,
     edited: false,
   });
@@ -193,7 +193,7 @@ exports.addReactions = async (req, res, next) => {
       post: req.params.id,
       reactor: req.user._id,
     });
-    console.log(isReactorAvailable);
+    // console.log(isReactorAvailable);
     if (!isReactorAvailable) {
       const savedReactions = await newReaction.save();
       const AddReactionsToPost = await Post.findByIdAndUpdate(
