@@ -131,7 +131,7 @@ const Registration = () => {
                 <label htmlFor="exampleInputEmail1">Date Of Birth</label>
                 <Calendar onChange={onChange} value={value} />
               </div>
-              {/* <div className="row">
+              <div className="row">
                 <div className="col-md-5">
                   <label>Gender</label>
                 </div>
@@ -169,7 +169,7 @@ const Registration = () => {
                     </label>
                   </div>
                 </div>
-              </div> */}
+              </div>
               <div className="text-center mt-3">
                 <button
                   type="submit"
