@@ -7,6 +7,11 @@ const Comment = ({ comments }) => {
       <div className="container-fluid pl-3">
         {comments.map((comment) => {
           //   console.log(comment);
+          // console.log(
+          //   moment(
+          //     new Date(comment.createdAt.split(", ").reverse().join(" "))
+          //   ).fromNow()
+          // );
           return (
             <div>
               <div className="row pt-3 pb-3 align-items-center ">
@@ -32,12 +37,7 @@ const Comment = ({ comments }) => {
               <div className="row">
                 <div className="col-md-10 offset-md-1  text-left">
                   <p style={{ marginLeft: "20px" }}>
-                    {" "}
-                    {moment(
-                      new Date(
-                        comment.createdAt.split(", ").reverse().join(" ")
-                      )
-                    ).fromNow()}{" "}
+                    {moment(new Date(comment.createdAt)).fromNow()}
                   </p>
                 </div>
               </div>

@@ -12,7 +12,7 @@ cloudinary.config({
 });
 
 exports.signUp = async function (req, res, next) {
-  console.log("signup");
+  // console.log("signup");
   const { day, month, year } = req.body;
   const user = new User({
     ...req.body,
@@ -67,7 +67,7 @@ exports.logout = async (req, res, next) => {
 
 exports.getAllUsers = async (req, res, next) => {
   const user = await User.find({});
-  console.log(user);
+  // console.log(user);
   try {
     res.send(user);
   } catch (error) {
@@ -103,7 +103,7 @@ exports.editUsers = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
+  // console.log(id);
   try {
     const user = await User.findById(id);
     res.status(200).json({ data: user });
@@ -174,7 +174,7 @@ exports.getUserFullDetails = async (req, res, next) => {
       })
       .populate("friends")
       .populate("friendsRequest");
-    console.log(user);
+    // console.log(user);
     res.status(200).json({ data: user });
   } catch (error) {
     res.send(error);
@@ -186,7 +186,7 @@ exports.searchPeople = async (req, res) => {
   User.findOne({ _id: req.user._id }).then((user) => {
     User.find(
       {
-        _id: { $nin: user.friends, $ne: user._id },
+        _id: { $ne: user._id },
         $or: [
           { firstName: new RegExp(search, "i") },
           { lastName: new RegExp(search, "i") },

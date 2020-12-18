@@ -4,6 +4,7 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import Comment from "./Comment";
 import headers from "../auth/headers";
 import moment from "moment";
+import "./Styles.css";
 
 const Post = ({ posts, currentUser }) => {
   const { comments, user, image, content, createdAt } = posts;
@@ -21,15 +22,12 @@ const Post = ({ posts, currentUser }) => {
     setCommentText("");
     // console.log(commentData);
     try {
-      const response = await fetch(
-        `/add-comment/${posts._id}`,
-        {
-          method: "post",
-          mode: "cors",
-          headers: headers(),
-          body: JSON.stringify(commentData),
-        }
-      );
+      const response = await fetch(`/add-comment/${posts._id}`, {
+        method: "post",
+        mode: "cors",
+        headers: headers(),
+        body: JSON.stringify(commentData),
+      });
       const res = await response.json();
       //   console.log(res.data, comments, "res");
       setComment((comment) => [...comment, res.data]);
@@ -41,15 +39,16 @@ const Post = ({ posts, currentUser }) => {
   //   console.log(comment, commentText, "com");
 
   useEffect(() => {
-    // console.log(posts.reactors);
+    console.log(posts);
+    setLikeCount(posts.reactors.length);
     const isLiked = posts.reactors.find((user) => {
       //   console.log(user, "user");
       return user.reactor._id === currentUser._id;
     });
-    // console.log(isLiked, "islike");
+    console.log(isLiked, "islike");
     if (isLiked) {
       setLiked(true);
-      setLikeCount(posts.reactors.length);
+      
     }
     if (comments) {
       setComment(comments);
@@ -57,45 +56,42 @@ const Post = ({ posts, currentUser }) => {
     }
   }, [currentUser._id]);
   //   console.log(LikeCount , "like")
+
   const addLike = async () => {
     const likeData = {
       type: "like",
     };
     if (!liked) {
       try {
-        const response = await fetch(
-          `/add-reactions/${posts._id}`,
-          {
-            method: "post",
-            mode: "cors",
-            headers: headers(),
-            body: JSON.stringify(likeData),
-          }
-        );
-        const res = await response.json();
-        const isLiked = posts.reactors.find((user) => {
-          return user.reactor._id === currentUser._id;
+        const response = await fetch(`/add-reactions/${posts._id}`, {
+          method: "post",
+          mode: "cors",
+          headers: headers(),
+          body: JSON.stringify(likeData),
         });
-        if (!isLiked) {
+        const res = await response.json();
+        // const isLiked = posts.reactors.find((user) => {
+        //   return user.reactor._id === currentUser._id;
+        // });
+        if (res) {
           setLikeCount((prevState) => prevState + 1);
+          setLiked(true);
         }
       } catch (error) {
         console.log(error);
       }
-      setLiked(true);
     } else {
       try {
-        const response = await fetch(
-          `/delete/reaction/${posts._id}`,
-          {
-            method: "delete",
-            mode: "cors",
-            headers: headers(),
-          }
-        );
+        const response = await fetch(`/delete/reaction/${posts._id}`, {
+          method: "delete",
+          mode: "cors",
+          headers: headers(),
+        });
         const res = await response.json();
-        setLiked(false);
-        setLikeCount((prevState) => prevState - 1);
+        if (res) {
+          setLiked(false);
+          setLikeCount((prevState) => prevState - 1);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -103,6 +99,9 @@ const Post = ({ posts, currentUser }) => {
   };
 
   // console.log(user , currentUser._id , " cu");
+  // console.log(
+  //   moment(new Date(createdAt)).fromNow()
+  // );
   return (
     <>
       <div className="container-fluid post-card mt-4">
@@ -121,10 +120,8 @@ const Post = ({ posts, currentUser }) => {
             <h2 className="modal-title">
               {`${user.firstName} ${user.lastName}`}
               <br />{" "}
-              <span style={{fontSize: "14px"}}>
-                {moment(
-                  new Date(createdAt.split(", ").reverse().join(" "))
-                ).fromNow()}
+              <span style={{ fontSize: "14px" }}>
+                {moment(new Date(createdAt)).fromNow()}
               </span>
             </h2>
           </div>
@@ -160,7 +157,10 @@ const Post = ({ posts, currentUser }) => {
           <p>{`${commentCount} comments`}</p>
         </div>
         <div className="row p-2 " style={{ border: "1px solid #dae0e5" }}>
-          <div className="col-6 like" onClick={addLike}>
+          <div
+            className={`col-6 like ${liked ? "coloured" : ""}`}
+            onClick={addLike}
+          >
             <ThumbUpIcon className={liked ? "coloured" : ""} />
             <span className={liked ? "coloured" : ""}>Like</span>
           </div>

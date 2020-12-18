@@ -11,13 +11,10 @@ const Profile = ({ currentUser }) => {
 
   useEffect(() => {
     const getUserPosts = async () => {
-      const response = await fetch(
-        `/user/posts/${currentUser._id}`,
-        {
-          mode: "cors",
-          headers: headers(),
-        }
-      );
+      const response = await fetch(`/user/posts/${currentUser._id}`, {
+        mode: "cors",
+        headers: headers(),
+      });
       const userPosts = await response.json();
       console.log(userPosts);
       setPosts(userPosts.data);
@@ -43,10 +40,13 @@ const Profile = ({ currentUser }) => {
         </div>
         <div className="row">
           <div className="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-            {posts.length &&
+            {posts && posts.length ? (
               posts.map((item) => (
                 <Post key={item._id} posts={item} currentUser={currentUser} />
-              ))}
+              ))
+            ) : (
+              <div>User hasn't posted any post yet</div>
+            )}
           </div>
         </div>
       </div>

@@ -5,9 +5,10 @@ import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
 import "./styles.css";
 import { Link } from "react-router-dom";
 
-const SearchList = ({ person }) => {
+const SearchList = ({ person, friends }) => {
   const [requestSent, setRequestSent] = useState(false);
-
+  const [isFriend, setIsFriend] = useState(false);
+  console.log(friends);
   const sendFriendRequest = async (toUser) => {
     const postData = {
       status: "Pending",
@@ -16,15 +17,12 @@ const SearchList = ({ person }) => {
       postData.status = "Decline";
     }
     try {
-      const response = await fetch(
-        `/friend-request/${toUser}`,
-        {
-          method: "post",
-          mode: "cors",
-          headers: headers(),
-          body: JSON.stringify(postData),
-        }
-      );
+      const response = await fetch(`/friend-request/${toUser}`, {
+        method: "post",
+        mode: "cors",
+        headers: headers(),
+        body: JSON.stringify(postData),
+      });
       const res = await response.json();
       setRequestSent(!requestSent);
     } catch (error) {
@@ -33,14 +31,18 @@ const SearchList = ({ person }) => {
   };
 
   useEffect(() => {
+    const isUserAvailable = friends.find((friend) => {
+      return person._id === friend._id;
+    });
+    // console.log(isUserAvailable);
+    if (isUserAvailable) {
+      setIsFriend(true);
+    }
     const addFriends = async () => {
-      const response = await fetch(
-        `/users/request/${person._id}`,
-        {
-          mode: "cors",
-          headers: headers(),
-        }
-      );
+      const response = await fetch(`/users/request/${person._id}`, {
+        mode: "cors",
+        headers: headers(),
+      });
       const res = await response.json();
       console.log(res);
       if (res.data.length) {
@@ -75,15 +77,17 @@ const SearchList = ({ person }) => {
             <span>{`${person.firstName} ${person.lastName}`}</span>
           </Link>
         </div>
-        <div className="col-2 text-right">
-          {!requestSent ? (
-            <PersonAddIcon onClick={() => sendFriendRequest(person._id)} />
-          ) : (
-            <PersonAddDisabledIcon
-              onClick={() => sendFriendRequest(person._id)}
-            />
-          )}
-        </div>
+        {!isFriend && (
+          <div className="col-2 text-right">
+            {!requestSent ? (
+              <PersonAddIcon onClick={() => sendFriendRequest(person._id)} />
+            ) : (
+              <PersonAddDisabledIcon
+                onClick={() => sendFriendRequest(person._id)}
+              />
+            )}
+          </div>
+        )}
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import headers from "../auth/headers";
+import { Link } from "react-router-dom";
 
 const FriendsSuggestionList = ({ friends }) => {
   const [requestSent, setRequestSent] = useState(false);
@@ -12,15 +13,12 @@ const FriendsSuggestionList = ({ friends }) => {
       postData.status = "Decline";
     }
     try {
-      const response = await fetch(
-        `/friend-request/${toUser}`,
-        {
-          method: "post",
-          mode: "cors",
-          headers: headers(),
-          body: JSON.stringify(postData),
-        }
-      );
+      const response = await fetch(`/friend-request/${toUser}`, {
+        method: "post",
+        mode: "cors",
+        headers: headers(),
+        body: JSON.stringify(postData),
+      });
       const res = await response.json();
       setRequestSent(!requestSent);
     } catch (error) {
@@ -32,15 +30,17 @@ const FriendsSuggestionList = ({ friends }) => {
     <div className="container-fuild">
       <div className="row d-flex   align-items-center p-2 pt-3 pb-3">
         <div className="col-sm-2 col-md-2 ">
-          <img
-            src={
-              friends.profilePicture
-                ? friends.profilePicture
-                : "https://res.cloudinary.com/dueq2a3w1/image/upload/v1608046828/default-image1_w8javi.jpg"
-            }
-            alt=""
-            width="40"
-          />
+          <Link to={`/user/posts/${friends._id}`}>
+            <img
+              src={
+                friends.profilePicture
+                  ? friends.profilePicture
+                  : "https://res.cloudinary.com/dueq2a3w1/image/upload/v1608046828/default-image1_w8javi.jpg"
+              }
+              alt=""
+              width="40"
+            />
+          </Link>
         </div>
         <div className="col-sm-5 col-md-5">
           {`${friends.firstName} ${friends.lastName}`}

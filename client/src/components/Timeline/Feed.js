@@ -111,11 +111,11 @@ const Feed = ({ currentUser, socket }) => {
       {posts.length > 0 ? (
         posts.map((item) => {
           console.log(item, "item");
-          return <Post posts={item} currentUser={currentUser} />;
+          return <Post posts={item} currentUser={currentUser} key={item._id} />;
         })
       ) : (
-        <div className="container">
-          <div className="row justify-content-center ">No Posts Available</div>
+        <div className=" post-card mt-5 mb-5  align-items-center">
+          <div className="pt-5 pb-5">No Posts Available</div>
         </div>
       )}
     </>

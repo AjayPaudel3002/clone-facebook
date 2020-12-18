@@ -9,28 +9,32 @@ const Login = ({ authenticated }) => {
   const history = useHistory();
   const logIn = async (e) => {
     e.preventDefault();
-    const formData = {
-      email,
-      password,
-    };
-    try {
-      const response = await fetch("/login", {
-        method: "post",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const user = await response.json();
-      console.log(user.user);
-      if (user.token) {
-        localStorage.setItem("user", JSON.stringify(user));
-        history.push(`/users/${user.user._id}/timeline`);
-        // window.location.reload();
-      } else if (user.message) {
-        setErrors(true);
+    if (!email || !password) {
+      alert("Please Enter Credentials");
+    } else {
+      const formData = {
+        email,
+        password,
+      };
+      try {
+        const response = await fetch("/login", {
+          method: "post",
+          mode: "cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        const user = await response.json();
+        console.log(user.user);
+        if (user.token) {
+          localStorage.setItem("user", JSON.stringify(user));
+          history.push(`/users/${user.user._id}/timeline`);
+          // window.location.reload();
+        } else if (user.message) {
+          setErrors(true);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
 

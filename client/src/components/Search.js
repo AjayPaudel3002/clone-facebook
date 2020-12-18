@@ -12,13 +12,10 @@ const Search = ({ currentUser, location, logOut }) => {
 
   useEffect(() => {
     const getSearchResult = async () => {
-      const response = await fetch(
-        `/users/search?q=${parsedString.q}`,
-        {
-          headers: headers(),
-          mode: "cors",
-        }
-      );
+      const response = await fetch(`/users/search?q=${parsedString.q}`, {
+        headers: headers(),
+        mode: "cors",
+      });
       const searchResult = await response.json();
       setPeople(searchResult.data);
     };
@@ -30,15 +27,17 @@ const Search = ({ currentUser, location, logOut }) => {
       <div className="conatiner">
         <div className="row">
           <div className="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
-            {people.length ? (
+            {people && people.length ? (
               <div className="container mt-5">
                 {people.length &&
                   people.map((person) => {
-                    return <SearchList key={person._id} person={person} />;
+                    return <SearchList key={person._id} person={person} friends={currentUser.friends} />;
                   })}
               </div>
             ) : (
-              <div className="conatiner m-5">No user Available</div>
+              <div className=" post-card mt-5 mb-5  align-items-center">
+                <div className="pt-5 pb-5">No User Available</div>
+              </div>
             )}
           </div>
         </div>

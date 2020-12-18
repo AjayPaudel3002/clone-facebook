@@ -83,6 +83,10 @@ label {
   color: blue;
 }
 
+.coloured .MuiSvgIcon-root {
+  color: blue;
+}
+
 .contacts-title {
   font-weight: bold;
   color: gray;

@@ -8,11 +8,12 @@ const Friends = ({ friends }) => {
       <div className="container-fluid">
         <hr className="mt-5" />
         <div className="contacts-title mt-4 mb-3">Contacts</div>
-        {friends &&
+        {friends && friends.length ? (
           friends.map((friend) => {
             console.log(friend);
             return (
               <div
+                key={friend._id}
                 className="row d-flex align-items-center pt-2 pb-2 contacts-list"
                 onClick={() => history.push(`/user/posts/${friend._id}`)}
               >
@@ -31,7 +32,10 @@ const Friends = ({ friends }) => {
                 <div className="col-sm-10">{`${friend.firstName} ${friend.lastName}`}</div>
               </div>
             );
-          })}
+          })
+        ) : (
+          <div>No Contacts Available</div>
+        )}
         <hr className="mt-5" />
       </div>
     </>

@@ -3,7 +3,7 @@ import headers from "../auth/headers";
 import FriendsSuggestionList from "./FriendsSuggestionList";
 
 const FriendsSuggestion = ({ currentUser }) => {
-//   console.log(currentUser);
+  //   console.log(currentUser);
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
@@ -24,10 +24,13 @@ const FriendsSuggestion = ({ currentUser }) => {
     <>
       <div className="container text-left post-card">
         <h2>Find People</h2>
-        {friends &&
+        {friends && friends.length ? (
           friends.map((item) => {
             return <FriendsSuggestionList key={item._id} friends={item} />;
-          })}
+          })
+        ) : (
+          <div className="mt-4">No New Friends Available</div>
+        )}
       </div>
     </>
   );

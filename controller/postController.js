@@ -29,7 +29,7 @@ exports.addNewPost = async (req, res, next) => {
       $push: { posts: newPost },
     });
     await addPostInUser.save();
-    console.log(addPostInUser);
+    // console.log(addPostInUser);
     const fullPost = await newPost
       .populate("user", "firstName lastName profilePicture")
       .execPopulate();
@@ -95,7 +95,7 @@ exports.getAllPosts = async (req, res, next) => {
 
 exports.getUsersPost = async (req, res, next) => {
   const id = req.params.id;
-  console.log(id);
+  // console.log(id);
   try {
     const post = await Post.find({ user: id })
       .populate({
@@ -193,7 +193,7 @@ exports.addReactions = async (req, res, next) => {
       post: req.params.id,
       reactor: req.user._id,
     });
-    // console.log(isReactorAvailable);
+    console.log(isReactorAvailable);
     if (!isReactorAvailable) {
       const savedReactions = await newReaction.save();
       const AddReactionsToPost = await Post.findByIdAndUpdate(

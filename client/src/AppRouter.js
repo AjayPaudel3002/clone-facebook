@@ -7,7 +7,7 @@ import UserPosts from "./components/UsersPost";
 import Profile from "./components/Profile/Profile";
 import FriendRequest from "./components/Timeline/FriendRequest";
 import Header from "./components/Nav/Header";
-import { Switch } from "react-router-dom";
+import { Switch, useHistory } from "react-router-dom";
 
 const AppRouter = (props) => {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -15,19 +15,21 @@ const AppRouter = (props) => {
   //   console.log(user);
   const [authenticated, setAuthenticated] = useState(user || "");
   const userId = user ? user.user._id : "";
+  const history = useHistory();
 
   const logOut = () => {
     localStorage.removeItem("user");
     setLoggedInUser({});
     setAuthenticated(false);
-    window.location = "/";
+    // window.location = "/";
+    history.push("/");
   };
 
   useEffect(() => {
-    // console.log(userId);
+    console.log(process.env);
     const getUserInfo = async () => {
       try {
-        console.log("app")
+        console.log("app");
         const response = await fetch(`/user-details`, {
           mode: "cors",
           headers: headers(),

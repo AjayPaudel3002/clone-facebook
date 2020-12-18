@@ -48,7 +48,7 @@ exports.sendFriendRequest = async (req, res, next) => {
         $pull: { friendRequests: { $in: [friendReqId._id] } },
       });
 
-      console.log(deleteToFriendReq, "del");
+      // console.log(deleteToFriendReq, "del");
       await deleteToFriendReq.save();
       // console.log(toUserProfile);
       res.status(200).send({ message: "Request deleted" });
