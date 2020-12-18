@@ -7,14 +7,14 @@ const FriendRequestList = ({ friends }) => {
   //   console.log(friends);
   const handleRequest = async (toUser) => {
     try {
-      const response = await fetch(`/accept-request/${toUser}`, {
+      const response = await fetch(`/api/accept-request/${toUser}`, {
         method: "put",
         mode: "cors",
         headers: headers(),
       });
       const res = await response.json();
       setAcceptReq(!acceptReq);
-      
+
     } catch (error) {
       console.log(error);
     }

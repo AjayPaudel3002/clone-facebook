@@ -12,7 +12,7 @@ const Profile = ({ currentUser }) => {
 
   useEffect(() => {
     const getUserPosts = async () => {
-      const response = await fetch(`/user/posts/${currentUser._id}`, {
+      const response = await fetch(`/api/user/posts/${currentUser._id}`, {
         mode: "cors",
         headers: headers(),
       });

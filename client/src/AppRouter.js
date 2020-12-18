@@ -30,7 +30,7 @@ const AppRouter = (props) => {
     const getUserInfo = async () => {
       try {
         console.log("app");
-        const response = await fetch(`/user-details`, {
+        const response = await fetch(`/api/user-details`, {
           mode: "cors",
           headers: headers(),
         });

@@ -17,7 +17,7 @@ const SearchList = ({ person, friends }) => {
       postData.status = "Decline";
     }
     try {
-      const response = await fetch(`/friend-request/${toUser}`, {
+      const response = await fetch(`/api/friend-request/${toUser}`, {
         method: "post",
         mode: "cors",
         headers: headers(),
@@ -39,7 +39,7 @@ const SearchList = ({ person, friends }) => {
       setIsFriend(true);
     }
     const addFriends = async () => {
-      const response = await fetch(`/users/request/${person._id}`, {
+      const response = await fetch(`/api/users/request/${person._id}`, {
         mode: "cors",
         headers: headers(),
       });

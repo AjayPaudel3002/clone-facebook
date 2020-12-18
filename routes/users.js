@@ -6,64 +6,68 @@ const userController = require("../controller/userController");
 const postController = require("../controller/postController");
 const friendRequestController = require("../controller/friendRequestController");
 
-router.post("/sign-up", userController.signUp);
+router.post("/api/sign-up", userController.signUp);
 
-router.post("/login", userController.login);
+router.post("/api/login", userController.login);
 
-router.post("/logout", auth, userController.logout);
+router.post("/api/logout", auth, userController.logout);
 
-router.get("/user/:id", userController.getUser);
+router.get("/api/user/:id", userController.getUser);
 
-router.post("/add-post", auth, postController.addNewPost);
+router.post("/api/add-post", auth, postController.addNewPost);
 
 router.post(
-  "/friend-request/:toUser",
+  "/api/friend-request/:toUser",
   auth,
   friendRequestController.sendFriendRequest
 );
 router.put(
-  "/accept-request/:toUser",
+  "/api/accept-request/:toUser",
   auth,
   friendRequestController.acceptFriendRequest
 );
 router.delete(
-  "/decline-request/:toUser",
+  "/api/decline-request/:toUser",
   auth,
   friendRequestController.declineFriendRequest
 );
 
-router.get("/all-users", userController.getAllUsers);
+router.get("/api/all-users", userController.getAllUsers);
 
-router.get("/all-posts", auth, postController.getAllPosts);
+router.get("/api/all-posts", auth, postController.getAllPosts);
 
-router.get("/user/posts/:id", auth, postController.getUsersPost);
+router.get("/api/user/posts/:id", auth, postController.getUsersPost);
 
-router.get("/post/:id", auth, postController.getSinglePost);
+router.get("/api/post/:id", auth, postController.getSinglePost);
 
-router.post("/add-comment/:id", auth, postController.addComment);
+router.post("/api/add-comment/:id", auth, postController.addComment);
 
-router.post("/add-reactions/:id", auth, postController.addReactions);
+router.post("/api/add-reactions/:id", auth, postController.addReactions);
 
-router.get("/non-friends-list", auth, userController.getFriendsSuggestions);
+router.get("/api/non-friends-list", auth, userController.getFriendsSuggestions);
 
-router.get("/user-details", auth, userController.getUserFullDetails);
+router.get("/api/user-details", auth, userController.getUserFullDetails);
 
-router.get("/users/search", auth, userController.searchPeople);
+router.get("/api/users/search", auth, userController.searchPeople);
 
-router.put("/users/edit", auth, userController.editUsers);
+router.put("/api/users/edit", auth, userController.editUsers);
 
 router.get(
-  "/users/request/:toUser",
+  "/api/users/request/:toUser",
   auth,
   friendRequestController.getAllUsersRequest
 );
 
 router.get(
-  "/users/received-request",
+  "/api/users/received-request",
   auth,
   friendRequestController.getReceivedRequest
 );
 
-router.delete("/delete/reaction/:postId", auth, postController.deleteReactions);
+router.delete(
+  "/api/delete/reaction/:postId",
+  auth,
+  postController.deleteReactions
+);
 
 module.exports = router;

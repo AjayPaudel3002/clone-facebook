@@ -22,7 +22,7 @@ const Post = ({ posts, currentUser }) => {
     setCommentText("");
     // console.log(commentData);
     try {
-      const response = await fetch(`/add-comment/${posts._id}`, {
+      const response = await fetch(`/api/add-comment/${posts._id}`, {
         method: "post",
         mode: "cors",
         headers: headers(),
@@ -63,7 +63,7 @@ const Post = ({ posts, currentUser }) => {
     };
     if (!liked) {
       try {
-        const response = await fetch(`/add-reactions/${posts._id}`, {
+        const response = await fetch(`/api/add-reactions/${posts._id}`, {
           method: "post",
           mode: "cors",
           headers: headers(),
@@ -82,7 +82,7 @@ const Post = ({ posts, currentUser }) => {
       }
     } else {
       try {
-        const response = await fetch(`/delete/reaction/${posts._id}`, {
+        const response = await fetch(`/api/delete/reaction/${posts._id}`, {
           method: "delete",
           mode: "cors",
           headers: headers(),

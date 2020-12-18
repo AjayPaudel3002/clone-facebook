@@ -17,7 +17,7 @@ const Login = ({ authenticated }) => {
         password,
       };
       try {
-        const response = await fetch("/login", {
+        const response = await fetch("/api/login", {
           method: "post",
           mode: "cors",
           headers: { "Content-Type": "application/json" },

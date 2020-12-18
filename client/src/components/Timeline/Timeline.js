@@ -12,7 +12,7 @@ const TimeLine = ({ logOut }) => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const response = await fetch("/user-details", {
+        const response = await fetch("/api/user-details", {
           mode: "cors",
           headers: headers(),
         });

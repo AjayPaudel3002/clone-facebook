@@ -33,7 +33,7 @@ const Registration = () => {
     };
     console.log(formData);
     try {
-      const response = await fetch("/sign-up", {
+      const response = await fetch("/api/sign-up", {
         method: "post",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
@@ -57,7 +57,7 @@ const Registration = () => {
       password,
     };
     try {
-      const response = await fetch("/login", {
+      const response = await fetch("/api/login", {
         method: "post",
         mode: "cors",
         headers: { "Content-Type": "application/json" },

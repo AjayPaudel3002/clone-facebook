@@ -26,7 +26,7 @@ const EditProfile = ({
           ? { profilePicture: reader.result }
           : { coverPhoto: reader.result };
       try {
-        const response = await fetch("/users/edit", {
+        const response = await fetch("/api/users/edit", {
           mode: "cors",
           headers: headers(),
           body: JSON.stringify(postData),
@@ -45,7 +45,7 @@ const EditProfile = ({
     console.log(currentUser);
     const getUserInfo = async () => {
       try {
-        const response = await fetch("/user-details", {
+        const response = await fetch("/api/user-details", {
           mode: "cors",
           headers: headers(),
         });

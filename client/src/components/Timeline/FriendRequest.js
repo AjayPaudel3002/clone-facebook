@@ -8,7 +8,7 @@ const FriendRequest = ({ currentUser, logOut }) => {
 
   useEffect(() => {
     const getFriends = async () => {
-      const response = await fetch("/users/received-request", {
+      const response = await fetch("/api/users/received-request", {
         headers: headers(),
       });
       const friendsList = await response.json();

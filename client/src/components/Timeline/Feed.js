@@ -22,7 +22,7 @@ const Feed = ({ currentUser, socket }) => {
     };
     // console.log(postData);
     try {
-      const response = await fetch("/add-post", {
+      const response = await fetch("/api/add-post", {
         method: "post",
         mode: "cors",
         headers: headers(),
@@ -66,7 +66,7 @@ const Feed = ({ currentUser, socket }) => {
   //console.log(friends, "frie");
   useEffect(() => {
     const getPosts = async () => {
-      const response = await fetch(`/all-posts`, {
+      const response = await fetch(`/api/all-posts`, {
         headers: headers(),
       });
       const postsData = await response.json();

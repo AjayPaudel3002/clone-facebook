@@ -9,7 +9,7 @@ const UserPosts = ({ currentUser, logOut, match }) => {
 
   useEffect(() => {
     const getUserPosts = async () => {
-      const response = await fetch(`/user/posts/${id}`, {
+      const response = await fetch(`/api/user/posts/${id}`, {
         mode: "cors",
         headers: headers(),
       });

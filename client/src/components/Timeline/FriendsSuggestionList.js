@@ -13,7 +13,7 @@ const FriendsSuggestionList = ({ friends }) => {
       postData.status = "Decline";
     }
     try {
-      const response = await fetch(`/friend-request/${toUser}`, {
+      const response = await fetch(`/api/friend-request/${toUser}`, {
         method: "post",
         mode: "cors",
         headers: headers(),

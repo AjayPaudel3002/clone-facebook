@@ -8,7 +8,7 @@ const FriendsSuggestion = ({ currentUser }) => {
 
   useEffect(() => {
     const getFriends = async () => {
-      const response = await fetch("/non-friends-list", {
+      const response = await fetch("/api/non-friends-list", {
         headers: headers(),
       });
       const friendsList = await response.json();

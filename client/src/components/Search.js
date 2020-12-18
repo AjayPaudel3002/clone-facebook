@@ -12,7 +12,7 @@ const Search = ({ currentUser, location, logOut }) => {
 
   useEffect(() => {
     const getSearchResult = async () => {
-      const response = await fetch(`/users/search?q=${parsedString.q}`, {
+      const response = await fetch(`/api/users/search?q=${parsedString.q}`, {
         headers: headers(),
         mode: "cors",
       });
