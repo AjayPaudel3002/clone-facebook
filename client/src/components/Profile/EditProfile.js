@@ -9,6 +9,7 @@ const EditProfile = ({
   profilePic,
   coverPic,
   currentUser,
+  setUserDetails,
 }) => {
   const [profilePreview, setProfilePreview] = useState("");
   const [coverPreview, setCoverPreview] = useState("");
@@ -41,8 +42,23 @@ const EditProfile = ({
   };
 
   useEffect(() => {
-    setProfilePreview(currentUser.profilePicture);
-    setCoverPreview(currentUser.coverPhoto);
+    console.log(currentUser);
+    const getUserInfo = async () => {
+      try {
+        const response = await fetch("/user-details", {
+          mode: "cors",
+          headers: headers(),
+        });
+        const res = await response.json();
+        // console.log(res);
+        setUserDetails(res.data || {});
+        setProfilePreview(res.data.profilePicture);
+        setCoverPreview(res.data.coverPhoto);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserInfo();
   }, []);
 
   return (

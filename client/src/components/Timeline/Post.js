@@ -109,8 +109,8 @@ const Post = ({ posts, currentUser }) => {
           <div className="col-10 col-xs-11 col-sm-11 d-flex align-items-center">
             <img
               src={
-                currentUser.profilePicture
-                  ? currentUser.profilePicture
+                user.profilePicture
+                  ? user.profilePicture
                   : "https://res.cloudinary.com/dueq2a3w1/image/upload/v1608046828/default-image1_w8javi.jpg"
               }
               alt=""

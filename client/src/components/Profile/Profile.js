@@ -8,6 +8,7 @@ const Profile = ({ currentUser }) => {
   const [profilepic, setProfilePic] = useState("");
   const [coverPic, setCoverPic] = useState("");
   const [posts, setPosts] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
     const getUserPosts = async () => {
@@ -35,6 +36,7 @@ const Profile = ({ currentUser }) => {
               profilePic={profilepic}
               coverPic={coverPic}
               currentUser={currentUser}
+              setUserDetails={setUserDetails}
             />
           </div>
         </div>
@@ -42,7 +44,7 @@ const Profile = ({ currentUser }) => {
           <div className="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
             {posts && posts.length ? (
               posts.map((item) => (
-                <Post key={item._id} posts={item} currentUser={currentUser} />
+                <Post key={item._id} posts={item} currentUser={userDetails} />
               ))
             ) : (
               <div className=" post-card mt-5 mb-5  align-items-center">
