@@ -128,14 +128,14 @@ const Registration = () => {
                 />
               </div>
               <div className="form-group text-start">
-                <label for="exampleInputEmail1">Date Of Birth</label>
+                <label htmlFor="exampleInputEmail1">Date Of Birth</label>
                 <Calendar onChange={onChange} value={value} />
               </div>
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-md-5">
                   <label>Gender</label>
                 </div>
-                <div className="col-md-7">
+                <div className="col-md-7 ">
                   <div>
                     <input
                       className="form-check-input"
@@ -145,7 +145,10 @@ const Registration = () => {
                       value="Male"
                       onChange={(e) => setGender(e.target.value)}
                     />
-                    <label className="form-check-label" for="exampleRadios1">
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleRadios1"
+                    >
                       Male
                     </label>
                   </div>
@@ -158,14 +161,21 @@ const Registration = () => {
                       value="Female"
                       onChange={(e) => setGender(e.target.value)}
                     />
-                    <label className="form-check-label" for="exampleRadios1">
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleRadios1"
+                    >
                       Female
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="text-center mt-3">
-                <button type="submit" className="btn btn-success " onClick={signUp}>
+                <button
+                  type="submit"
+                  className="btn btn-success "
+                  onClick={signUp}
+                >
                   Register
                 </button>
               </div>

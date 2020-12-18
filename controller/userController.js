@@ -16,7 +16,7 @@ exports.signUp = async function (req, res, next) {
   const { day, month, year } = req.body;
   const user = new User({
     ...req.body,
-    birthday: { birthday: { day, month, year } },
+    birthday: { day, month, year },
     createdAt: moment.utc().format(),
   });
   try {

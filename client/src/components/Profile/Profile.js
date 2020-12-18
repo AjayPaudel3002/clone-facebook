@@ -45,7 +45,9 @@ const Profile = ({ currentUser }) => {
                 <Post key={item._id} posts={item} currentUser={currentUser} />
               ))
             ) : (
-              <div>User hasn't posted any post yet</div>
+              <div className=" post-card mt-5 mb-5  align-items-center">
+                <div className="pt-5 pb-5">No Posts Available</div>
+              </div>
             )}
           </div>
         </div>
