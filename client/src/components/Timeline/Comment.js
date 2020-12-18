@@ -37,7 +37,7 @@ const Comment = ({ comments }) => {
               <div className="row">
                 <div className="col-md-10 offset-md-1  text-left">
                   <p style={{ marginLeft: "20px" }}>
-                    {moment(new Date(comment.createdAt)).fromNow()}
+                    {moment.utc(new Date(comment.createdAt)).fromNow()}
                   </p>
                 </div>
               </div>

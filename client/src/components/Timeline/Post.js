@@ -121,7 +121,7 @@ const Post = ({ posts, currentUser }) => {
               {`${user.firstName} ${user.lastName}`}
               <br />{" "}
               <span style={{ fontSize: "14px" }}>
-                {moment(new Date(createdAt)).fromNow()}
+                {moment.utc(new Date(createdAt)).fromNow()}
               </span>
             </h2>
           </div>

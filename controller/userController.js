@@ -17,7 +17,7 @@ exports.signUp = async function (req, res, next) {
   const user = new User({
     ...req.body,
     birthday: { birthday: { day, month, year } },
-    createdAt: moment().format("MM/DD/YYYY HH:mm"),
+    createdAt: moment.utc().format(),
   });
   try {
     const token = await user.generateAuthToken();

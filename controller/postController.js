@@ -22,7 +22,7 @@ exports.addNewPost = async (req, res, next) => {
       user: req.user._id,
       content,
       image: imageUrl.url || "",
-      createdAt: moment().format("MM/DD/YYYY HH:mm"),
+      createdAt: moment.utc().format(),
     });
     const newPost = await post.save();
     const addPostInUser = await User.findByIdAndUpdate(req.user._id, {
