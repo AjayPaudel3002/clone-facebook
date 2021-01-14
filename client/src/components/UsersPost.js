@@ -3,7 +3,6 @@ import Post from "../components/Timeline/Post";
 import headers from "./auth/headers";
 
 const UserPosts = ({ currentUser, logOut, match }) => {
-  // console.log(logOut, "cuuu");
   const id = match.params.id;
   const [posts, setPosts] = useState([]);
 
@@ -14,7 +13,6 @@ const UserPosts = ({ currentUser, logOut, match }) => {
         headers: headers(),
       });
       const userPosts = await response.json();
-      console.log(userPosts);
       setPosts(userPosts.data);
     };
     if (currentUser) {
@@ -33,9 +31,7 @@ const UserPosts = ({ currentUser, logOut, match }) => {
               ))
             ) : (
               <div className=" post-card mt-5 mb-5  align-items-center">
-                <div className="pt-5 pb-5">
-                  No Posts Available
-                </div>
+                <div className="pt-5 pb-5">No Posts Available</div>
               </div>
             )}
           </div>

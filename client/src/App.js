@@ -11,12 +11,12 @@ import PublicRoute from "./PublicRoute";
 import AppRouter from "./AppRouter";
 
 function App() {
-  // const [loggedInUser, setLoggedInUser] = useState({});
+  
   const user = JSON.parse(localStorage.getItem("user")) || "";
-  // console.log(user);
+  
   const [authenticated, setAuthenticated] = useState(user || "");
 
-  // console.log("loggedInUser");
+  
   return (
     <>
       <Router>

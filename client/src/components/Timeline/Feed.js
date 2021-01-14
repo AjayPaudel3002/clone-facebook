@@ -12,7 +12,6 @@ const Feed = ({ currentUser, socket }) => {
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState([]);
   const [posts, setPosts] = useState([]);
-  //   console.log(user || "");
 
   const postCreate = async (e) => {
     e.preventDefault();
@@ -20,7 +19,7 @@ const Feed = ({ currentUser, socket }) => {
       content,
       image,
     };
-    // console.log(postData);
+
     try {
       const response = await fetch("/api/add-post", {
         method: "post",
@@ -29,7 +28,7 @@ const Feed = ({ currentUser, socket }) => {
         body: JSON.stringify(postData),
       });
       const res = await response.json();
-      console.log(res, "res");
+
       if (res.errors) {
         setErrors(res.errors);
         return;
@@ -51,7 +50,6 @@ const Feed = ({ currentUser, socket }) => {
   };
 
   const handleFile = (e) => {
-    //   console.log(e.target.value)
     setImagePreview(URL.createObjectURL(e.target.files[0]));
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -63,18 +61,17 @@ const Feed = ({ currentUser, socket }) => {
   const [showLoader, setShowLoader] = useState(true);
   const friends =
     currentUser.friends && currentUser.friends.map((friend) => friend._id);
-  //console.log(friends, "frie");
+
   useEffect(() => {
     const getPosts = async () => {
       const response = await fetch(`/api/all-posts`, {
         headers: headers(),
       });
       const postsData = await response.json();
-      //   console.log(postsData.data);
+
       setPosts(postsData.data);
       setShowLoader(!showLoader);
       socket.on("newPost", (post) => {
-        // console.log(post, "client");
         if (
           post.user._id !== currentUser._id &&
           friends.includes(post.user._id)
@@ -89,10 +86,8 @@ const Feed = ({ currentUser, socket }) => {
     return function () {
       socket.off("newPost");
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser._id]);
 
-  //   console.log(posts, "posts");
   return (
     <>
       {showModal && (
@@ -110,7 +105,6 @@ const Feed = ({ currentUser, socket }) => {
 
       {posts.length > 0 ? (
         posts.map((item) => {
-          console.log(item, "item");
           return <Post posts={item} currentUser={currentUser} key={item._id} />;
         })
       ) : (

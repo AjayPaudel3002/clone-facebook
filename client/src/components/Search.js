@@ -5,8 +5,7 @@ import SearchList from "./SearchList";
 const queryString = require("query-string");
 
 const Search = ({ currentUser, location, logOut }) => {
-  console.log(currentUser);
-  // const people = location.state.searchResult;
+  
   const parsedString = queryString.parse(location.search);
   const [people, setPeople] = useState([]);
 

@@ -3,7 +3,6 @@ import headers from "../auth/headers";
 import FriendRequestList from "./FriendRequestList";
 
 const FriendRequest = ({ currentUser, logOut }) => {
-  console.log(currentUser);
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
@@ -12,7 +11,6 @@ const FriendRequest = ({ currentUser, logOut }) => {
         headers: headers(),
       });
       const friendsList = await response.json();
-      //   console.log(friendsList);
       setFriends(friendsList.data);
     };
     if (currentUser._id) {
@@ -30,7 +28,9 @@ const FriendRequest = ({ currentUser, logOut }) => {
                 return <FriendRequestList key={item.from._id} friends={item} />;
               })
             ) : (
-              <div className="mt-5 mb-5 align-items-center">No Request Available</div>
+              <div className="mt-5 mb-5 align-items-center">
+                No Request Available
+              </div>
             )}
           </div>
         </div>

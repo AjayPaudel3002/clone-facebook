@@ -13,14 +13,14 @@ const Post = ({ posts, currentUser }) => {
   const [commentCount, setCommentCount] = useState(0);
   const [LikeCount, setLikeCount] = useState(0);
   const [liked, setLiked] = useState(false);
-  // console.log(user._id , currentUser._id ,  "user")
+
   const createComments = async (e) => {
     e.preventDefault();
     const commentData = {
       content: commentText,
     };
     setCommentText("");
-    // console.log(commentData);
+
     try {
       const response = await fetch(`/api/add-comment/${posts._id}`, {
         method: "post",
@@ -29,33 +29,27 @@ const Post = ({ posts, currentUser }) => {
         body: JSON.stringify(commentData),
       });
       const res = await response.json();
-      //   console.log(res.data, comments, "res");
       setComment((comment) => [...comment, res.data]);
       setCommentCount((prevState) => prevState + 1);
     } catch (error) {
       console.error(error);
     }
   };
-  //   console.log(comment, commentText, "com");
 
   useEffect(() => {
-    console.log(posts);
     setLikeCount(posts.reactors.length);
     const isLiked = posts.reactors.find((user) => {
-      //   console.log(user, "user");
       return user.reactor._id === currentUser._id;
     });
-    console.log(isLiked, "islike");
+
     if (isLiked) {
       setLiked(true);
-      
     }
     if (comments) {
       setComment(comments);
       setCommentCount(comments.length);
     }
   }, [currentUser._id]);
-  //   console.log(LikeCount , "like")
 
   const addLike = async () => {
     const likeData = {
@@ -70,9 +64,7 @@ const Post = ({ posts, currentUser }) => {
           body: JSON.stringify(likeData),
         });
         const res = await response.json();
-        // const isLiked = posts.reactors.find((user) => {
-        //   return user.reactor._id === currentUser._id;
-        // });
+
         if (res) {
           setLikeCount((prevState) => prevState + 1);
           setLiked(true);
@@ -98,10 +90,6 @@ const Post = ({ posts, currentUser }) => {
     }
   };
 
-  // console.log(user , currentUser._id , " cu");
-  // console.log(
-  //   moment(new Date(createdAt)).fromNow()
-  // );
   return (
     <>
       <div className="container-fluid post-card mt-4">

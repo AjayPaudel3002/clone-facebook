@@ -17,7 +17,6 @@ const Registration = () => {
   const [errors, setErrors] = useState("");
   const [btnText, setBtnText] = useState("Sign up");
   const history = useHistory();
-  console.log(value);
 
   const signUp = async (e) => {
     e.preventDefault();
@@ -31,7 +30,7 @@ const Registration = () => {
       year: value.getFullYear(),
       gender,
     };
-    console.log(formData);
+
     try {
       const response = await fetch("/api/sign-up", {
         method: "post",
@@ -40,7 +39,7 @@ const Registration = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      console.log(data.message);
+
       if (data.message) {
         setErrors(data.message);
       }
@@ -64,7 +63,7 @@ const Registration = () => {
         body: JSON.stringify(formData),
       });
       const user = await response.json();
-      console.log(user);
+
       if (user.token) {
         localStorage.setItem("user", JSON.stringify(user));
         history.push(`/users/${user.user._id}/timeline`);
@@ -76,10 +75,6 @@ const Registration = () => {
       console.error(error);
     }
   };
-
-  const responseGoogle = (response)=>{
-        console.log(response)
-  }
 
   return (
     <>
@@ -184,14 +179,6 @@ const Registration = () => {
                 Alread have an account ? <Link to="/">Login</Link>
               </div>
             </form>
-            {/* <div className="row">
-              <GoogleLogin
-                clientId="1044531787216-cgn8ccddsbqh9t18ismhnhjqtft3d3p1.apps.googleusercontent.com"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                // buttonText="Login"
-              />
-            </div> */}
           </div>
         </div>
       </div>

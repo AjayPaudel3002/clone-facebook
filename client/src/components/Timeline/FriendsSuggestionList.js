@@ -25,7 +25,7 @@ const FriendsSuggestionList = ({ friends }) => {
       console.log(error);
     }
   };
-  //   console.log(requestSent);
+
   return (
     <div className="container-fuild">
       <div className="row d-flex   align-items-center p-2 pt-3 pb-3">

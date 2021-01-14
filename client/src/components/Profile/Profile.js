@@ -17,7 +17,6 @@ const Profile = ({ currentUser }) => {
         headers: headers(),
       });
       const userPosts = await response.json();
-      console.log(userPosts);
       setPosts(userPosts.data);
     };
     if (currentUser) {

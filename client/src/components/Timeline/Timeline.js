@@ -17,7 +17,6 @@ const TimeLine = ({ logOut }) => {
           headers: headers(),
         });
         const res = await response.json();
-        // console.log(res);
         setUserDetails(res.data || {});
       } catch (err) {
         console.log(err);
@@ -26,17 +25,17 @@ const TimeLine = ({ logOut }) => {
     getUserInfo();
   }, [userDetails._id]);
 
-  const socket = io.connect("", {
+  const socket = io.connect("http://localhost:5000", {
     transports: ["websocket", "polling", "flashsocket"],
   });
 
   useEffect(() => {
-    console.log(userDetails._id, "userDetails");
+    
     socket.emit("connection", userDetails._id);
     return () => {};
   }, [userDetails._id, socket]);
 
-  //   console.log(userDetails);
+
   return (
     <>
       <div

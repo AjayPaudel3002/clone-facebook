@@ -3,8 +3,6 @@ import headers from "../auth/headers";
 
 const FriendRequestList = ({ friends }) => {
   const [acceptReq, setAcceptReq] = useState(false);
-  //   const [declineReq, setdeclineReq] = useState(false);
-  //   console.log(friends);
   const handleRequest = async (toUser) => {
     try {
       const response = await fetch(`/api/accept-request/${toUser}`, {
@@ -14,7 +12,6 @@ const FriendRequestList = ({ friends }) => {
       });
       const res = await response.json();
       setAcceptReq(!acceptReq);
-
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +23,6 @@ const FriendRequestList = ({ friends }) => {
     }
   }, []);
 
-  //   console.log(requestSent);
   return (
     <div className="container-fuild">
       <div className="row d-flex   align-items-center p-2 pt-3 pb-3">
@@ -45,12 +41,14 @@ const FriendRequestList = ({ friends }) => {
           {`${friends.from.firstName} ${friends.from.lastName}`}
         </div>
         <div className="col-sm-4 col-md-4">
-          {!acceptReq && <button
-            className="btn btn-primary"
-            onClick={() => handleRequest(friends.from._id)}
-          >
-            Confirm
-          </button>}
+          {!acceptReq && (
+            <button
+              className="btn btn-primary"
+              onClick={() => handleRequest(friends.from._id)}
+            >
+              Confirm
+            </button>
+          )}
         </div>
       </div>
     </div>

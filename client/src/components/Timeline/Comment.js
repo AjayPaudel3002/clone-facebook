@@ -6,12 +6,6 @@ const Comment = ({ comments }) => {
     <>
       <div className="container-fluid pl-3">
         {comments.map((comment) => {
-          //   console.log(comment);
-          // console.log(
-          //   moment(
-          //     new Date(comment.createdAt.split(", ").reverse().join(" "))
-          //   ).fromNow()
-          // );
           return (
             <div>
               <div className="row pt-3 pb-3 align-items-center ">

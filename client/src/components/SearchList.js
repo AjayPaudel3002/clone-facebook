@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const SearchList = ({ person, friends }) => {
   const [requestSent, setRequestSent] = useState(false);
   const [isFriend, setIsFriend] = useState(false);
-  console.log(friends);
+  
   const sendFriendRequest = async (toUser) => {
     const postData = {
       status: "Pending",
@@ -34,7 +34,7 @@ const SearchList = ({ person, friends }) => {
     const isUserAvailable = friends.find((friend) => {
       return person._id === friend._id;
     });
-    // console.log(isUserAvailable);
+    
     if (isUserAvailable) {
       setIsFriend(true);
     }
@@ -44,7 +44,7 @@ const SearchList = ({ person, friends }) => {
         headers: headers(),
       });
       const res = await response.json();
-      console.log(res);
+      
       if (res.data.length) {
         setRequestSent(true);
       }

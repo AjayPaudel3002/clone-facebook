@@ -24,11 +24,11 @@ const Login = ({ authenticated }) => {
           body: JSON.stringify(formData),
         });
         const user = await response.json();
-        console.log(user.user);
+        
         if (user.token) {
           localStorage.setItem("user", JSON.stringify(user));
           history.push(`/users/${user.user._id}/timeline`);
-          // window.location.reload();
+         
         } else if (user.message) {
           setErrors(true);
         }

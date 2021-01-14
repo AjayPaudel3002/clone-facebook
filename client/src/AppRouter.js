@@ -12,7 +12,7 @@ import { Switch, useHistory } from "react-router-dom";
 const AppRouter = (props) => {
   const [loggedInUser, setLoggedInUser] = useState({});
   const user = JSON.parse(localStorage.getItem("user")) || "";
-  //   console.log(user);
+
   const [authenticated, setAuthenticated] = useState(user || "");
   const userId = user ? user.user._id : "";
   const history = useHistory();
@@ -21,21 +21,17 @@ const AppRouter = (props) => {
     localStorage.removeItem("user");
     setLoggedInUser({});
     setAuthenticated(false);
-    // window.location = "/";
     history.push("/");
   };
 
   useEffect(() => {
-    console.log(process.env);
     const getUserInfo = async () => {
       try {
-        console.log("app");
         const response = await fetch(`/api/user-details`, {
           mode: "cors",
           headers: headers(),
         });
         const user = await response.json();
-        // console.log(user);
         setLoggedInUser(user.data);
       } catch (err) {
         console.error(err);
