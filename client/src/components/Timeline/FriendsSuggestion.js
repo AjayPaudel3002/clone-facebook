@@ -3,7 +3,6 @@ import headers from "../auth/headers";
 import FriendsSuggestionList from "./FriendsSuggestionList";
 
 const FriendsSuggestion = ({ currentUser }) => {
-  //   console.log(currentUser);
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
@@ -12,7 +11,6 @@ const FriendsSuggestion = ({ currentUser }) => {
         headers: headers(),
       });
       const friendsList = await response.json();
-      //   console.log(friendsList);
       setFriends(friendsList.data);
     };
     if (currentUser._id) {

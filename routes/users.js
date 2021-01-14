@@ -5,6 +5,7 @@ const router = new express.Router();
 const userController = require("../controller/userController");
 const postController = require("../controller/postController");
 const friendRequestController = require("../controller/friendRequestController");
+const messageController = require("../controller/messageController");
 
 router.post("/api/sign-up", userController.signUp);
 
@@ -69,5 +70,35 @@ router.delete(
   auth,
   postController.deleteReactions
 );
+
+router.post("/api/add-message/:toUser", auth, messageController.sendMessage);
+
+router.get(
+  "/api/private-message/:toUser",
+  auth,
+  messageController.getAllMessages
+);
+
+router.post("/api/message/delete", auth, messageController.deleteForMe);
+
+router.post(
+  "/api/message/deleteForAll",
+  auth,
+  messageController.deleteForEveryone
+);
+
+router.post(
+  "/api/add/message-reactions/:messageId",
+  auth,
+  messageController.addMessageReactions
+);
+
+router.delete(
+  "/api/delete/message-reactions/:messageId",
+  auth,
+  messageController.deleteMessageReactions
+);
+
+router.put("/api/message-status/edit", auth, messageController.editMessage);
 
 module.exports = router;

@@ -15,7 +15,7 @@ import { IconButton } from "@material-ui/core";
 // import { ExpandMore } from "@material-ui/icons";
 
 const Header = ({ currentUser, logOut }) => {
-  console.log(logOut);
+  
   const history = useHistory();
   const [searchValue, setSearchValue] = useState("");
 

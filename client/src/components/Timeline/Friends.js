@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 const Friends = ({ friends }) => {
-  //   console.log(currentUser.friends);
   const history = useHistory();
   return (
     <>
@@ -10,7 +9,6 @@ const Friends = ({ friends }) => {
         <div className="contacts-title mt-4 mb-3">Contacts</div>
         {friends && friends.length ? (
           friends.map((friend) => {
-            console.log(friend);
             return (
               <div
                 key={friend._id}

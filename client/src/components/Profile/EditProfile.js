@@ -20,7 +20,7 @@ const EditProfile = ({
     reader.readAsDataURL(e.target.files[0]);
     reader.onloadend = async () => {
       setImage(reader.result);
-      console.log(photoCategory);
+
       const postData =
         photoCategory === "profilePicture"
           ? { profilePicture: reader.result }
@@ -33,8 +33,6 @@ const EditProfile = ({
           method: "put",
         });
         const res = await response.json();
-        console.log(res);
-        console.log(postData);
       } catch (error) {
         console.log(error);
       }
@@ -42,7 +40,6 @@ const EditProfile = ({
   };
 
   useEffect(() => {
-    console.log(currentUser);
     const getUserInfo = async () => {
       try {
         const response = await fetch("/api/user-details", {
@@ -50,7 +47,6 @@ const EditProfile = ({
           headers: headers(),
         });
         const res = await response.json();
-        // console.log(res);
         setUserDetails(res.data || {});
         setProfilePreview(res.data.profilePicture);
         setCoverPreview(res.data.coverPhoto);
